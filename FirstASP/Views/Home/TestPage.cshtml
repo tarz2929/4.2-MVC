@@ -12,6 +12,16 @@
     <input type="submit" value="Submit" />
 </form>
 
-<ul>
+<!-- This is an HTML comment. -->
+@* This is a C# Razor comment. *@
 
+<!--  -->
+@if (ViewBag.Items.Count > 0)
+{
+<ul>
+    @foreach (string item in ViewBag.Items)
+    {
+        <li>@(item)</li>
+    }
 </ul>
+}
