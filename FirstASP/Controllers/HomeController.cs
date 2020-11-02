@@ -42,13 +42,14 @@ namespace FirstASP.Controllers
 
         public IActionResult TestPage(string item)
         {
+            /*
             if (!string.IsNullOrWhiteSpace(item))
             {
                 People.Add(item);
             }
 
             ViewBag.Items = People;
-
+            */
             return View();
         }
 
@@ -58,25 +59,6 @@ namespace FirstASP.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public static List<Person> People = new List<Person>();
-        public void CreatePerson(string firstName, string lastName)
-        {
-            People.Add(new Person()
-            {
-                FirstName = firstName.Trim(),
-                LastName = lastName.Trim()
-            });
-        }
-
-        public void DeletePersonByFirstName(string firstName)
-        {
-            People.Remove(GetPersonByFirstName(firstName));
-        }
-
-        public Person GetPersonByFirstName(string firstName)
-        {
-            // This assumes nobody's name is duplicated. If it is, it will return null.
-            return People.Where(x => x.FirstName.Trim().ToUpper() == firstName.Trim().ToUpper()).SingleOrDefault();
-        }
+       
     }
 }

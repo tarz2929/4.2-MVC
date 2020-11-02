@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "Management";
+}
+
+<h1>Management</h1>
+
+<section>
+    <h2>List of People</h2>
+    @if(ViewBag.People.Count > 0)
+    {
+        <ul>
+            @foreach(Person person in ViewBag.People)
+            {
+                <li>@(person.FirstName) @(person.LastName)</li>
+            }
+        </ul>
+    }
+</section>
+
+<section>
+    <h2>Create a Person</h2>
+</section>
+
+<section>
+    <h2>Delete a Person</h2>
+</section>
