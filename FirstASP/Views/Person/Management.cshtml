@@ -1,6 +1,7 @@
 ﻿
 @{
     ViewData["Title"] = "Management";
+    System.Diagnostics.Debug.WriteLine("VIEW - Rendering Management View\n-------------------------");
 }
 
 <h1>Management</h1>
@@ -20,8 +21,21 @@
 
 <section>
     <h2>Create a Person</h2>
+    <form action="/Person/Create" method="get">
+        <label for="firstName">First Name:</label>
+        <input id="firstName" type="text" name="firstName" value="" />
+        <label for="lastName">Last Name:</label>
+        <input id="lastName" type="text" name="lastName" value="" />
+        <input type="submit" value="Submit" />
+    </form>
+
 </section>
 
 <section>
     <h2>Delete a Person</h2>
+    <form action="/Person/Delete" method="get">
+        <label for="firstName">First Name:</label>
+        <input id="firstName" type="text" name="firstName" value="" />
+        <input type="submit" value="Submit" />
+    </form>
 </section>

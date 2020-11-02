@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using FirstASP.Models;
@@ -11,15 +12,32 @@ namespace FirstASP.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            Debug.WriteLine("ACTION - Index Action");
+
+            return RedirectToAction("Management");
         }
 
         public IActionResult Management()
         {
-            People.Add(new Person() { FirstName = "Test", LastName = "Tester" });
-            People.Add(new Person() { FirstName = "Person", LastName = "Two" });
+            Debug.WriteLine("ACTION - Management Action");
             ViewBag.People = People;
             return View();
+        }
+
+        public IActionResult Create(string firstName, string lastName)
+        {
+            Debug.WriteLine("ACTION - Create Action");
+
+            CreatePerson(firstName, lastName);
+            return RedirectToAction("Management");
+        }
+
+        public IActionResult Delete(string firstName)
+        {
+            Debug.WriteLine("ACTION - Delete Action");
+
+            DeletePersonByFirstName(firstName);
+            return RedirectToAction("Management");
         }
 
         public static List<Person> People = new List<Person>();
@@ -27,6 +45,8 @@ namespace FirstASP.Controllers
         // These methods are for data management. The body of the methods will be replaced with EF code tomorrow, but for now, we're just using a static list.
         public void CreatePerson(string firstName, string lastName)
         {
+            Debug.WriteLine($"DATA - CreatePerson({firstName}, {lastName})");
+
             People.Add(new Person()
             {
                 FirstName = firstName.Trim(),
@@ -36,11 +56,15 @@ namespace FirstASP.Controllers
 
         public void DeletePersonByFirstName(string firstName)
         {
+            Debug.WriteLine($"DATA - DeletePersonByFirstName({firstName})");
+
             People.Remove(GetPersonByFirstName(firstName));
         }
 
         public Person GetPersonByFirstName(string firstName)
         {
+            Debug.WriteLine($"DATA - GetPersonByFirstName({firstName})");
+
             // This assumes nobody's name is duplicated. If it is, it will return null.
             return People.Where(x => x.FirstName.Trim().ToUpper() == firstName.Trim().ToUpper()).SingleOrDefault();
         }
