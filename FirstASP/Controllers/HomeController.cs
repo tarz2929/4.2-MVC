@@ -38,7 +38,7 @@ namespace FirstASP.Controllers
             return View();
         }
 
-        public IActionResult TestPage()
+        public IActionResult TestPage(string item)
         {
             return View();
         }
