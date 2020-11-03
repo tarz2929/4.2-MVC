@@ -3,12 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EntityFramework_4Point2.Models
+namespace FirstASP.Models
 {
-    class DealershipContext : DbContext
+    class PersonContext : DbContext
     {
 
-        public virtual DbSet<EMailAddress> Vehicles { get; set; }
+        public virtual DbSet<EMailAddress> EMailAddresses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -18,7 +18,7 @@ namespace EntityFramework_4Point2.Models
                     "server=localhost;" +
                     "port=3306;" +
                     "user=root;" +
-                    "database=codefirst_4point2;";
+                    "database=mvc_4point2;";
 
                 string version = "10.4.14-MariaDB";
 
@@ -30,10 +30,15 @@ namespace EntityFramework_4Point2.Models
         {
             modelBuilder.Entity<Person>(entity =>
             {
-                entity.Property(e => e.Name)
+                entity.Property(e => e.FirstName)
                 .HasCharSet("utf8mb4")
                 .HasCollation("utf8mb4_general_ci");
 
+                entity.Property(e => e.LastName)
+                .HasCharSet("utf8mb4")
+                .HasCollation("utf8mb4_general_ci");
+
+                /*
                 entity.HasData(
                     new Person()
                     {
@@ -51,6 +56,7 @@ namespace EntityFramework_4Point2.Models
                         Name = "Dodge"
                     }
                 );
+                */
             });
             modelBuilder.Entity<EMailAddress>(entity =>
             {
@@ -58,11 +64,7 @@ namespace EntityFramework_4Point2.Models
                     "_" + nameof(Person);
 
                 // These SHOULD be set automatically. If you want to play around with it by removing these and verify this version of EF works that way, feel free. 
-                entity.Property(e => e.Model)
-                .HasCharSet("utf8mb4")
-                .HasCollation("utf8mb4_general_ci");
-
-                entity.Property(e => e.Colour)
+                entity.Property(e => e.Address)
                 .HasCharSet("utf8mb4")
                 .HasCollation("utf8mb4_general_ci");
 
@@ -75,8 +77,7 @@ namespace EntityFramework_4Point2.Models
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName(keyName);
 
-                // In-class Practice 2:
-                // Add seed data for 5 vehicles similarly to the manufacturers above.
+                /*
                 entity.HasData(
                     new EMailAddress()
                     {
@@ -119,7 +120,7 @@ namespace EntityFramework_4Point2.Models
                         ModelYear = 2016
                     }
                     );
-
+                    */
             });
         }
     }
