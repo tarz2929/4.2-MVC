@@ -20,6 +20,18 @@
             }
         </ul>
     }
+
+<section>
+    <h2>Add an Email Address</h2>
+    <form action="/Person/AddEmail" method="get">
+        <input type="hidden" name="id" value="@(ViewBag.Person.ID)" />
+        <div>
+            <label for="address">Email Address:</label>
+            <input id="address" type="text" name="address" value="" />
+        </div>
+        <input type="submit" value="Submit" />
+    </form>
+</section>
 }
 else
 {

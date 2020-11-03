@@ -35,6 +35,12 @@ namespace FirstASP.Controllers
             return View();
         }
 
+        public IActionResult AddEmail(string id, string address)
+        {
+            AddEmailToPersonByID(id, address);
+            return RedirectToAction("Details", new Dictionary<string, string>() { { "id", id } });
+        }
+
         public IActionResult Create(string firstName, string lastName, string dateOfBirth)
         {
             CreatePerson(firstName, lastName, dateOfBirth);
@@ -67,6 +73,19 @@ namespace FirstASP.Controllers
             using (PersonContext context = new PersonContext())
             {
                 context.People.Remove(GetPersonByFirstName(firstName));
+                context.SaveChanges();
+            }
+        }
+
+        public void AddEmailToPersonByID(string id, string address)
+        {
+            using (PersonContext context = new PersonContext())
+            {
+                context.EMailAddresses.Add(new EMailAddress()
+                {
+                    PersonID = int.Parse(id),
+                    Address = address.Trim()
+                });
                 context.SaveChanges();
             }
         }
