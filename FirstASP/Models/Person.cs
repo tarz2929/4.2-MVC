@@ -10,7 +10,7 @@ namespace FirstASP.Models
 
     // Challenge: Implement the foreign key.
     [Table("person")]
-    class Person
+    public class Person
     {
         public Person()
         {
