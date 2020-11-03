@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FirstASP.Models
 {
-    class PersonContext : DbContext
+    public class PersonContext : DbContext
     {
         public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<EMailAddress> EMailAddresses { get; set; }

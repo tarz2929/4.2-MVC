@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FirstASP.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +25,8 @@ namespace FirstASP
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            // This is required for scaffolded controllers.
+            services.AddDbContext<PersonContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
