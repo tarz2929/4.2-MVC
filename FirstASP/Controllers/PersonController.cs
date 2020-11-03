@@ -40,14 +40,14 @@ namespace FirstASP.Controllers
             return RedirectToAction("Management");
         }
 
-        public static List<Person> People = new List<Person>();
+        public static List<Book> People = new List<Book>();
 
         // These methods are for data management. The body of the methods will be replaced with EF code tomorrow, but for now, we're just using a static list.
         public void CreatePerson(string firstName, string lastName)
         {
             Debug.WriteLine($"DATA - CreatePerson({firstName}, {lastName})");
 
-            People.Add(new Person()
+            People.Add(new Book()
             {
                 FirstName = firstName.Trim(),
                 LastName = lastName.Trim()
@@ -61,7 +61,7 @@ namespace FirstASP.Controllers
             People.Remove(GetPersonByFirstName(firstName));
         }
 
-        public Person GetPersonByFirstName(string firstName)
+        public Book GetPersonByFirstName(string firstName)
         {
             Debug.WriteLine($"DATA - GetPersonByFirstName({firstName})");
 

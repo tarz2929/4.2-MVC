@@ -11,7 +11,7 @@
     @if(ViewBag.People.Count > 0)
     {
         <ul>
-            @foreach(Person person in ViewBag.People)
+            @foreach(Book person in ViewBag.People)
             {
                 <li>@(person.FirstName) @(person.LastName)</li>
             }
