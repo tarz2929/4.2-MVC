@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "Details";
+}
+
+@if (ViewBag.Person != null)
+{
+    <h1>Details - @(ViewBag.Person.ID)</h1>
+
+    <p>First Name: @(ViewBag.Person.FirstName)</p>
+    <p>Last Name: @(ViewBag.Person.LastName)</p>
+    <p>Date of Birth: @(ViewBag.Person.DateOfBirth.ToLongDateString())</p>
+
+    @if(ViewBag.Person.EMailAddresses.Count > 0)
+    {
+        <ul>
+            @foreach(EMailAddress email in ViewBag.Person.EMailAddresses)
+            {
+                <li>@(email.Address)</li>
+            }
+        </ul>
+    }
+}
+else
+{
+    <h1>Details</h1>
+    <p>An error occured fetching person details, <a href="/Person/Management">click here to return to person management</a>.</p>
+}

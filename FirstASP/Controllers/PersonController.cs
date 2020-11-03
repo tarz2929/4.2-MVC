@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FirstASP.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FirstASP.Controllers
 {
@@ -12,30 +13,36 @@ namespace FirstASP.Controllers
     {
         public IActionResult Index()
         {
-            Debug.WriteLine("ACTION - Index Action");
-
             return RedirectToAction("Management");
         }
 
         public IActionResult Management()
         {
-            Debug.WriteLine("ACTION - Management Action");
-            ViewBag.People = GetPeople();
+           ViewBag.People = GetPeople();
+            return View();
+        }
+
+        public IActionResult Details(string id)
+        {
+            try
+            {
+                ViewBag.Person = GetPersonByID(id);
+            }
+            catch
+            {
+
+            }
             return View();
         }
 
         public IActionResult Create(string firstName, string lastName, string dateOfBirth)
         {
-            Debug.WriteLine("ACTION - Create Action");
-
             CreatePerson(firstName, lastName, dateOfBirth);
             return RedirectToAction("Management");
         }
 
         public IActionResult Delete(string firstName)
         {
-            Debug.WriteLine("ACTION - Delete Action");
-
             DeletePersonByFirstName(firstName);
             return RedirectToAction("Management");
         }
@@ -43,8 +50,6 @@ namespace FirstASP.Controllers
         // These methods are for data management. The body of the methods will be replaced with EF code tomorrow, but for now, we're just using a static list.
         public void CreatePerson(string firstName, string lastName, string dateOfBirth)
         {
-            Debug.WriteLine($"DATA - CreatePerson({firstName}, {lastName})");
-
             using (PersonContext context = new PersonContext())
             {
                 context.People.Add(new Person()
@@ -59,8 +64,6 @@ namespace FirstASP.Controllers
         }
         public void DeletePersonByFirstName(string firstName)
         {
-            Debug.WriteLine($"DATA - DeletePersonByFirstName({firstName})");
-
             using (PersonContext context = new PersonContext())
             {
                 context.People.Remove(GetPersonByFirstName(firstName));
@@ -70,11 +73,28 @@ namespace FirstASP.Controllers
 
         public Person GetPersonByFirstName(string firstName)
         {
-            Debug.WriteLine($"DATA - GetPersonByFirstName({firstName})");
             Person found;
             using (PersonContext context = new PersonContext())
             {
                 found = context.People.Where(x => x.FirstName.Trim().ToUpper() == firstName.Trim().ToUpper()).SingleOrDefault();
+            }
+            return found;
+        }
+
+        public Person GetPersonByID(string id)
+        {
+            Person found;
+            using (PersonContext context = new PersonContext())
+            {
+                // Loading Option 1 - Eager:
+                // .Include() allows data from associated tables to be loaded as part of an initial query. By default, only the table requested via the context property (People, in this case) is loaded.
+                // found = context.People.Where(x => x.ID == int.Parse(id)).Include(x => x.EMailAddresses).SingleOrDefault();
+
+                // Loading Option 2 - Explicit:
+                found = context.People.Where(x => x.ID == int.Parse(id)).SingleOrDefault();
+
+                // With explicit loading, we can load after the initial query. Use Reference() for singular navigation properties, and Collection() for plural.
+                context.Entry(found).Collection(x => x.EMailAddresses).Load();
             }
             return found;
         }
