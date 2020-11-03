@@ -16,7 +16,7 @@
 @* This is a C# Razor comment. *@
 
 <!--  -->
-@if (ViewBag.Items.Count > 0)
+@if (ViewBag.Items != null && ViewBag.Items.Count > 0)
 {
 <ul>
     @foreach (string item in ViewBag.Items)

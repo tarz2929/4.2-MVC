@@ -53,6 +53,8 @@ namespace FirstASP.Controllers
                     LastName = lastName.Trim(),
                     DateOfBirth = DateTime.Parse(dateOfBirth.Trim())
                 });
+                context.SaveChanges();
+
             }
         }
         public void DeletePersonByFirstName(string firstName)
@@ -62,6 +64,7 @@ namespace FirstASP.Controllers
             using (PersonContext context = new PersonContext())
             {
                 context.People.Remove(GetPersonByFirstName(firstName));
+                context.SaveChanges();
             }
         }
 
