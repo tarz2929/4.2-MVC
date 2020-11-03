@@ -13,7 +13,7 @@
         <ul>
             @foreach(Person person in ViewBag.People)
             {
-                <li>@(person.FirstName) @(person.LastName)</li>
+                <li>@(person.FirstName) @(person.LastName), Born @(person.DateOfBirth.ToLongDateString())</li>
             }
         </ul>
     }
@@ -26,6 +26,8 @@
         <input id="firstName" type="text" name="firstName" value="" />
         <label for="lastName">Last Name:</label>
         <input id="lastName" type="text" name="lastName" value="" />
+        <label for="dateOfBirth">Date of Birth:</label>
+        <input id="dateOfBirth" type="text" name="dateOfBirth" value="" />
         <input type="submit" value="Submit" />
     </form>
 

@@ -20,15 +20,15 @@ namespace FirstASP.Controllers
         public IActionResult Management()
         {
             Debug.WriteLine("ACTION - Management Action");
-            ViewBag.People = People;
+            ViewBag.People = GetPeople();
             return View();
         }
 
-        public IActionResult Create(string firstName, string lastName)
+        public IActionResult Create(string firstName, string lastName, string dateOfBirth)
         {
             Debug.WriteLine("ACTION - Create Action");
 
-            CreatePerson(firstName, lastName);
+            CreatePerson(firstName, lastName, dateOfBirth);
             return RedirectToAction("Management");
         }
 
@@ -40,33 +40,50 @@ namespace FirstASP.Controllers
             return RedirectToAction("Management");
         }
 
-        public static List<Person> People = new List<Person>();
-
         // These methods are for data management. The body of the methods will be replaced with EF code tomorrow, but for now, we're just using a static list.
-        public void CreatePerson(string firstName, string lastName)
+        public void CreatePerson(string firstName, string lastName, string dateOfBirth)
         {
             Debug.WriteLine($"DATA - CreatePerson({firstName}, {lastName})");
 
-            People.Add(new Person()
+            using (PersonContext context = new PersonContext())
             {
-                FirstName = firstName.Trim(),
-                LastName = lastName.Trim()
-            });
+                context.People.Add(new Person()
+                {
+                    FirstName = firstName.Trim(),
+                    LastName = lastName.Trim(),
+                    DateOfBirth = DateTime.Parse(dateOfBirth.Trim())
+                });
+            }
         }
-
         public void DeletePersonByFirstName(string firstName)
         {
             Debug.WriteLine($"DATA - DeletePersonByFirstName({firstName})");
 
-            People.Remove(GetPersonByFirstName(firstName));
+            using (PersonContext context = new PersonContext())
+            {
+                context.People.Remove(GetPersonByFirstName(firstName));
+            }
         }
 
         public Person GetPersonByFirstName(string firstName)
         {
             Debug.WriteLine($"DATA - GetPersonByFirstName({firstName})");
+            Person found;
+            using (PersonContext context = new PersonContext())
+            {
+                found = context.People.Where(x => x.FirstName.Trim().ToUpper() == firstName.Trim().ToUpper()).SingleOrDefault();
+            }
+            return found;
+        }
 
-            // This assumes nobody's name is duplicated. If it is, it will return null.
-            return People.Where(x => x.FirstName.Trim().ToUpper() == firstName.Trim().ToUpper()).SingleOrDefault();
+        public List<Person> GetPeople()
+        {
+            List<Person> all;
+            using (PersonContext context = new PersonContext())
+            {
+                all = context.People.ToList();
+            }
+            return all;
         }
     }
 }
