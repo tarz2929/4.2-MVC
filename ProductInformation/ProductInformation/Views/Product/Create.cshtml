@@ -4,4 +4,19 @@
 }
 
 <h1>Create</h1>
+@if (ViewBag.Message != null)
+{
+    <p class="alert-@(ViewBag.Error != null ? "danger" : "success")">@(ViewBag.Message)</p>
+}
 
+<form action="/Product/Create" method="post">
+    <div>
+        <label for="categoryID">Product Category:</label>
+        <input type="text" id="categoryID" name="categoryID" value="@(ViewBag.CategoryID)" />
+    </div>
+    <div>
+        <label for="name">Product Name:</label>
+        <input type="text" id="name" name="name" value="@(ViewBag.Name)" />
+    </div>
+    <input type="submit" value="Go" />
+</form>
