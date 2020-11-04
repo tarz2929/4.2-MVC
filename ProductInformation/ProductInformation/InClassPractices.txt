@@ -39,3 +39,9 @@ Create a view for each of List and Create (Product).
 Add a GetProducts() method to the ProductController that will retrieve products.
 Render a list of all products in the List view.
 Add both of our views to the navigation.
+
+Practice 8:
+Update the List view to only render the table if there are products (count > 0).
+Update the GetProducts method to either explicitly or eagerly load the category data.
+Update the List view to show the category name instead of the ID.
+Optional: Make the table look pretty.
