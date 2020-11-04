@@ -9,3 +9,6 @@ Generate a context called "ProductInfoContext"
 	Foreign keys and seed data are not required.
 	Please do, however, collate the string fields.
 
+Practice 3:
+Implement the foriegn key between product to category in the models and the context file.
+	Example: https://github.com/TECHCareers-by-Manpower/4.2-MVC/tree/master/FirstASP/Models
