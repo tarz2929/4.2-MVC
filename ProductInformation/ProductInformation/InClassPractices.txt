@@ -33,3 +33,9 @@ Practice 6:
 Create an empty controller for Product.
 Add a Action for Create and an action for List.
 Redirect the Index action to List.
+
+Practice 7:
+Create a view for each of List and Create.
+Add a GetProducts() method to the ProductController that will retrieve products.
+Render a list of all products in the List view.
+Add both of our views to the navigation.
