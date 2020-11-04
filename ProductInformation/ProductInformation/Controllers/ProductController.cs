@@ -35,6 +35,7 @@ namespace ProductInformation.Controllers
                 }
             }
 
+            ViewBag.Categories = CategoryController.GetCategories();
             return View();
         }
 

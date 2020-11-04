@@ -12,7 +12,19 @@
 <form action="/Product/Create" method="post">
     <div>
         <label for="categoryID">Product Category:</label>
-        <input type="text" id="categoryID" name="categoryID" value="@(ViewBag.CategoryID)" />
+        <select id="categoryID" name="categoryID">
+            @foreach (Category category in ViewBag.Categories)
+            {
+                @if (category.ID.ToString() == ViewBag.CategoryID)
+                {
+                    <option value="@(category.ID)" selected>@(category.Name)</option>
+                }
+                else
+                {
+                    <option value="@(category.ID)">@(category.Name)</option>
+                }
+            }
+        </select>
     </div>
     <div>
         <label for="name">Product Name:</label>
