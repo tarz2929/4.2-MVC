@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FirstASP.Models
+namespace ProductInformation.Models
 {
     public class ProductInfoContext : DbContext
     {

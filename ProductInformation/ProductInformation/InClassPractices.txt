@@ -12,3 +12,6 @@ Generate a context called "ProductInfoContext"
 Practice 3:
 Implement the foriegn key between product to category in the models and the context file.
 	Example: https://github.com/TECHCareers-by-Manpower/4.2-MVC/tree/master/FirstASP/Models
+
+Practice 4: 
+Create a migration called "InitialMigration". Push it to the database. Confirm it in PHPMyAdmin. Add seed data for both tables (2 categories and 5 products total minimum). Add a second (and potentially third) migration, and push those as well.
