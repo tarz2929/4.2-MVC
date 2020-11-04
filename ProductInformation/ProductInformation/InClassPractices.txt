@@ -35,7 +35,7 @@ Add a Action for Create and an action for List.
 Redirect the Index action to List.
 
 Practice 7:
-Create a view for each of List and Create.
+Create a view for each of List and Create (Product).
 Add a GetProducts() method to the ProductController that will retrieve products.
 Render a list of all products in the List view.
 Add both of our views to the navigation.
