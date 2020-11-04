@@ -28,3 +28,8 @@ Create a scaffolded controller with views for the Category model.
 	-Select MVC Controller with Views, Using Entity Framework.
 	-Fill out the options (see Library Day 2 spec for screenshots).
 	-Hit OK.
+
+Practice 6:
+Create an empty controller for Product.
+Add a Action for Create and an action for List.
+Redirect the Index action to List.
