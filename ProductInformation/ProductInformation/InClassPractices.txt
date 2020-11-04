@@ -46,3 +46,7 @@ Update the GetProducts method to either explicitly or eagerly load the category 
 Update the List view to show the category name instead of the ID.
 Optional: Make the table look pretty.
 
+Practice 9:
+Fill in the Create view with a form.
+Add a CreateProduct method to the Product Controller.
+Optional: Make the Category field a dropdown that is populated from a GetCategories method in CategoryController (you'll have to write that method).
