@@ -45,3 +45,4 @@ Update the List view to only render the table if there are products (count > 0).
 Update the GetProducts method to either explicitly or eagerly load the category data.
 Update the List view to show the category name instead of the ID.
 Optional: Make the table look pretty.
+

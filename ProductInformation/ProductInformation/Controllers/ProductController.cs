@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProductInformation.Models;
 
 namespace ProductInformation.Controllers
@@ -34,7 +35,7 @@ namespace ProductInformation.Controllers
             List<Product> results;
             using (ProductInfoContext context = new ProductInfoContext())
             {
-                results = context.Products.ToList();
+                results = context.Products.Include(x => x.Category).ToList();
             }
             return results;
         }
