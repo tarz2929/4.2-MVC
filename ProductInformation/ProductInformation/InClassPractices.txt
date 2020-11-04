@@ -8,3 +8,4 @@ Generate a context called "ProductInfoContext"
 	Example: https://github.com/TECHCareers-by-Manpower/4.2-MVC/blob/master/FirstASP/Models/PersonContext.cs
 	Foreign keys and seed data are not required.
 	Please do, however, collate the string fields.
+
