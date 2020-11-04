@@ -25,6 +25,7 @@ namespace ProductInformation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            // Required for scaffolded controllers and views to work out of the box.
             services.AddDbContext<ProductInfoContext>();
         }
 
