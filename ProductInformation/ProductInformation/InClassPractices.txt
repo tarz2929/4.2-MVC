@@ -15,3 +15,8 @@ Implement the foriegn key between product to category in the models and the cont
 
 Practice 4: 
 Create a migration called "InitialMigration". Push it to the database. Confirm it in PHPMyAdmin. Add seed data for both tables (2 categories and 5 products total minimum). Add a second (and potentially third) migration, and push those as well.
+	-Run "dotnet ef migrations add InitialMigration"
+	-Run "dotnet ef database update"
+	-Make changes to context (add entity.HasData) and don't forget to save
+	-Run "dotnet ef migrations add SeedData"
+	-Run "dotnet ef database update"
