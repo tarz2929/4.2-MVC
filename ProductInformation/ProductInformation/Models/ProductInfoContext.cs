@@ -31,31 +31,29 @@ namespace FirstASP.Models
         {
             modelBuilder.Entity<Category>(entity =>
             {
-                /*
-                string keyName = "FK_" + nameof(EMailAddress) +
-                    "_" + nameof(Person);
-                */
-
                 entity.Property(e => e.Name)
                 .HasCharSet("utf8mb4")
                 .HasCollation("utf8mb4_general_ci");
-
-                /*
-                entity.HasIndex(e => e.PersonID)
-                .HasName(keyName);
-
-                entity.HasOne(thisEntity => thisEntity.Person)
-                .WithMany(parent => parent.EMailAddresses)
-                .HasForeignKey(thisEntity => thisEntity.PersonID)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName(keyName);
-                */
             });
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.Property(e => e.Name)
                 .HasCharSet("utf8mb4")
                 .HasCollation("utf8mb4_general_ci");
+
+                string keyToCategory = "FK_" + nameof(Product) +
+                    "_" + nameof(Category);
+                // FK_Product_Category
+
+                
+                entity.HasIndex(e => e.CategoryID)
+                .HasName(keyToCategory);
+
+                entity.HasOne(thisEntity => thisEntity.Category)
+                .WithMany(parent => parent.Products)
+                .HasForeignKey(thisEntity => thisEntity.CategoryID)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName(keyToCategory);
             });
         }
     }

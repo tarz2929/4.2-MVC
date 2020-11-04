@@ -22,5 +22,9 @@ namespace ProductInformation.Models
 
         [Column(TypeName = "int(10)")]
         public int CategoryID { get; set; }
+
+        [ForeignKey(nameof(CategoryID))]
+        [InverseProperty(nameof(Models.Category.Products))]
+        public virtual Category Category { get; set; }
     }
 }
