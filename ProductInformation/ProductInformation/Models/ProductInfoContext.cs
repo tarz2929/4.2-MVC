@@ -34,6 +34,19 @@ namespace ProductInformation.Models
                 entity.Property(e => e.Name)
                 .HasCharSet("utf8mb4")
                 .HasCollation("utf8mb4_general_ci");
+
+                entity.HasData(
+                    new Category()
+                    {
+                        ID = -1,
+                        Name = "Kitchen"
+                    },
+                    new Category()
+                    {
+                        ID = -2,
+                        Name = "Garage"
+                    }
+                );
             });
             modelBuilder.Entity<Product>(entity =>
             {
@@ -54,6 +67,39 @@ namespace ProductInformation.Models
                 .HasForeignKey(thisEntity => thisEntity.CategoryID)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName(keyToCategory);
+
+                entity.HasData(
+                    new Product()
+                    {
+                        ID = -1,
+                        CategoryID = -1,
+                        Name = "Mixer"
+                    },
+                    new Product()
+                    {
+                        ID = -2,
+                        CategoryID = -1,
+                        Name = "Rice Cooker"
+                    },
+                    new Product()
+                    {
+                        ID = -3,
+                        CategoryID = -2,
+                        Name = "Wrench Set"
+                    },
+                    new Product()
+                    {
+                        ID = -4,
+                        CategoryID = -2,
+                        Name = "Floor Jack"
+                    },
+                    new Product()
+                    {
+                        ID = -5,
+                        CategoryID = -2,
+                        Name = "Screwdriver Set"
+                    }
+                );
             });
         }
     }
