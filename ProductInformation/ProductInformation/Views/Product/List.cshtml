@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>List</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Category ID</th>
+        <th>Product Name</th>
+    </tr>
+    @foreach(Product product in ViewBag.Products)
+    {
+        <tr>
+            <td>@(product.ID)</td>
+            <td>@(product.CategoryID)</td>
+            <td>@(product.Name)</td>
+        </tr>
+    }
+</table>
