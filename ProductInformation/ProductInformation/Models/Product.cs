@@ -15,6 +15,7 @@ namespace ProductInformation.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
+        // [Column("ProductName", TypeName = "varchar(30)")]
         [Column(TypeName = "varchar(30)")]
         [Required]
         public string Name { get; set; }
