@@ -20,3 +20,11 @@ Create a migration called "InitialMigration". Push it to the database. Confirm i
 	-Make changes to context (add entity.HasData) and don't forget to save
 	-Run "dotnet ef migrations add SeedData"
 	-Run "dotnet ef database update"
+
+Practice 5:
+Create a scaffolded controller with views for the Category model.
+	-Right click on Controllers.
+	-Select add Controller.
+	-Select MVC Controller with Views, Using Entity Framework.
+	-Fill out the options (see Library Day 2 spec for screenshots).
+	-Hit OK.
