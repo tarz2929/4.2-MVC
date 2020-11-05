@@ -137,6 +137,13 @@ namespace ProductInformation.Controllers
                             // Common validation point (3).
                             exception.ValidationExceptions.Add(new Exception("The Maximum Length of a Name is 30 Characters"));
                         }
+                        else
+                        {
+                            if (name.ToUpper() == "PAPER CUPS" && parsedCategoryID == context.Categories.Where(x => x.Name == "Kitchen").Single().ID)
+                            {
+                                exception.ValidationExceptions.Add(new Exception("Only Glass Glasses Allowed Here"));
+                            }
+                        }
                     }
                 }
 
