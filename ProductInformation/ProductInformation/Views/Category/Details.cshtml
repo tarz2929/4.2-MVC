@@ -22,3 +22,7 @@
     <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+@* This won't actually work here since this is for Products / Categories. Just an example. *@
+<a href="/Category/Details?id=@(ViewBag.Book.ID)&action=extend">Extend</a>
+<a href="/Category/Details?id=@(ViewBag.Book.ID)&action=delete">Delete</a>
+<a href="/Category/Details?id=@(ViewBag.Book.ID)&action=return">Return</a>
