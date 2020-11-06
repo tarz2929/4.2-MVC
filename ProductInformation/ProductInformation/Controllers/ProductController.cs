@@ -45,9 +45,18 @@ namespace ProductInformation.Controllers
             return View();
         }
 
-        public IActionResult List()
+        public IActionResult List(string filter)
         {
-            ViewBag.Products = GetProducts();
+            if (filter == "kitchen")
+            {
+                ViewBag.Products = GetKitchenProducts();
+                ViewBag.Filter = true;
+            }
+            else
+            {
+                ViewBag.Products = GetProducts();
+                ViewBag.Filter = false;
+            }
             return View();
         }
 
@@ -60,6 +69,16 @@ namespace ProductInformation.Controllers
             using (ProductInfoContext context = new ProductInfoContext())
             {
                 results = context.Products.Include(x => x.Category).ToList();
+            }
+            return results;
+        }
+
+        public List<Product> GetKitchenProducts()
+        {
+            List<Product> results;
+            using (ProductInfoContext context = new ProductInfoContext())
+            {
+                results = context.Products.Include(x => x.Category).Where(x => x.Category.Name == "Kitchen").ToList();
             }
             return results;
         }

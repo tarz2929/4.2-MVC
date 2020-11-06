@@ -5,6 +5,12 @@
 
 <h1>List</h1>
 
+<form action="/Product/List" method="get">
+    <label for="filter">Filter to Kitchen</label>
+    <input type="checkbox" id="filter" name="filter" value="kitchen" @(ViewBag.Filter ? "checked" : "")/>
+    <input type="submit" value="Go!" />
+</form>
+
 @if (ViewBag.Products != null && ViewBag.Products.Count > 0)
 {
 <table class="table">
