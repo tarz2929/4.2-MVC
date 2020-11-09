@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ProductInformation.Models;
 
 namespace ProductInformation.Controllers
 {
@@ -39,6 +40,10 @@ namespace ProductInformation.Controllers
             500: "Internal Server Error" - Something's broke, who knows what
         */
 
-
+        [HttpGet("All")]
+        public ActionResult<IEnumerable<Product>> AllProducts_GET()
+        {
+            return new ProductController().GetProducts();
+        }
     }
 }

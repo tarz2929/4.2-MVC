@@ -92,6 +92,25 @@ namespace ProductInformation.Controllers
             }
             return results;
         }
+        public List<Product> GetProductsByCategoryID()
+        {
+            List<Product> results;
+            using (ProductInfoContext context = new ProductInfoContext())
+            {
+                results = context.Products.Include(x => x.Category).ToList();
+            }
+            return results;
+        }
+
+        public Product GetProductByID()
+        {
+            List<Product> results;
+            using (ProductInfoContext context = new ProductInfoContext())
+            {
+                results = context.Products.Include(x => x.Category).ToList();
+            }
+            return results;
+        }
 
         public List<Product> GetKitchenProducts()
         {
