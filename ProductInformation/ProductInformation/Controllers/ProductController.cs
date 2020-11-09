@@ -47,6 +47,8 @@ namespace ProductInformation.Controllers
 
         public IActionResult List(string filter)
         {
+            GroupByExample();
+
             if (filter == "kitchen")
             {
                 ViewBag.Products = GetKitchenProducts();
@@ -63,6 +65,24 @@ namespace ProductInformation.Controllers
 
 
         // Data Methods:
+        public void GroupByExample()
+        {
+            using (ProductInfoContext context = new ProductInfoContext())
+            {
+                var results = context.Products
+                    // Group by the foreign key.
+                    .GroupBy(x => x.CategoryID)
+                    // Select a new anonymous object with the fields you want.
+                    // I used the ID we grouped by (x.Key) and an aggregate of the grouping's object Name lengths
+                    .Select(x => new 
+                    { 
+                        ID = x.Key, 
+                        MaxLength = x.Max(y => y.Name.Length)
+                    }).ToList();
+            }
+            
+        }
+
         public List<Product> GetProducts()
         {
             List<Product> results;
