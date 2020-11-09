@@ -92,24 +92,57 @@ namespace ProductInformation.Controllers
             }
             return results;
         }
-        public List<Product> GetProductsByCategoryID()
+        public List<Product> GetProductsByCategoryID(string categoryID)
         {
+
             List<Product> results;
+            int parsedCategoryID;
+
+            if (string.IsNullOrWhiteSpace(categoryID))
+            {
+                throw new ArgumentNullException(nameof(categoryID), "CategoryID is null.");
+            }
+            if (!int.TryParse(categoryID, out parsedCategoryID))
+            {
+                throw new ArgumentException("CategoryID is not valid.", nameof(categoryID));
+            }
+
             using (ProductInfoContext context = new ProductInfoContext())
             {
-                results = context.Products.Include(x => x.Category).ToList();
+                if (!context.Categories.Any(x => x.ID == parsedCategoryID))
+                {
+                    throw new KeyNotFoundException($"Category ID {parsedCategoryID} does not exist."); 
+                }
+
+                results = context.Products.Where(x => x.CategoryID == parsedCategoryID).Include(x => x.Category).ToList();
             }
             return results;
         }
 
-        public Product GetProductByID()
+        public Product GetProductByID(string productID)
         {
-            List<Product> results;
+            Product result;
+            int parsedID;
+
+            if (string.IsNullOrWhiteSpace(productID))
+            {
+                throw new ArgumentNullException(nameof(productID), "CategoryID is null.");
+            }
+            if (!int.TryParse(productID, out parsedID))
+            {
+                throw new ArgumentException("CategoryID is not valid.", nameof(productID));
+            }
+
             using (ProductInfoContext context = new ProductInfoContext())
             {
-                results = context.Products.Include(x => x.Category).ToList();
+                if (!context.Products.Any(x => x.ID == parsedID))
+                {
+                    throw new KeyNotFoundException($"Product ID {parsedID} does not exist.");
+                }
+
+                result = context.Products.Where(x => x.ID == parsedID).Include(x => x.Category).Single();
             }
-            return results;
+            return result;
         }
 
         public List<Product> GetKitchenProducts()
