@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -150,8 +151,9 @@ namespace ProductInformation.Controllers
             return results;
         }
 
-        public void CreateProduct(string categoryID, string name)
+        public Product CreateProduct(string categoryID, string name)
         {
+
             int parsedCategoryID = 0;
             ValidationException exception = new ValidationException();
 
@@ -242,13 +244,51 @@ namespace ProductInformation.Controllers
                     throw exception;
                 }
 
-                context.Products.Add(new Product()
+                Product newProduct = new Product()
                 {
                     CategoryID = int.Parse(categoryID),
                     Name = name
-                });
+                };
+                context.Products.Add(newProduct);
+                context.SaveChanges();
+
+                return newProduct;
+            }
+            
+        }
+
+        public Product UpdateProductByID(string productID, string name)
+        {
+            Product result;
+            int parsedID;
+
+            // TODO: Trim name;
+
+            if (string.IsNullOrWhiteSpace(productID))
+            {
+                throw new ArgumentNullException(nameof(productID), nameof(productID) + " is null.");
+            }
+            if (!int.TryParse(productID, out parsedID))
+            {
+                throw new ArgumentException(nameof(productID) + " is not valid.", nameof(productID));
+            }
+
+            using (ProductInfoContext context = new ProductInfoContext())
+            {
+                result = context.Products.Where(x => x.ID == parsedID).Include(x => x.Category).Single();
+
+                if (result.Name == name)
+                {
+                    throw new ArgumentException(nameof(productID) + $" already has the name {name}.", nameof(productID));
+                }
+
+                result.Name = name;
                 context.SaveChanges();
             }
+            return result;
         }
+
+
+
     }
 }
